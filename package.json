@@ -1,0 +1,27 @@
+{
+  "name": "flat-rate-tickets-test-task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:ts": "tsc -w",
+    "start:js": "nodemon build/app.js",
+    "start": "concurrently npm:start:*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/morgan": "^1.9.4",
+    "concurrently": "^7.3.0",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.8.7",
+    "typescript": "^5.1.6"
+  }
+}
