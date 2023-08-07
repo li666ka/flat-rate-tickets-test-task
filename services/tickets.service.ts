@@ -1,19 +1,19 @@
-import { TicketDto } from '../controllers/dto/ticket.dto';
-import { TicketFiltersDtoParsed } from '../controllers/dto/ticket_filters.dto';
-
 import { Seat, SeatRepository } from '../models/seat.model';
 import { Section, SectionRepository } from '../models/section.model';
 import { Price, PriceRepository } from '../models/price.model';
-
 import { AppError, HttpCode } from '../exceptions/app_error';
+
+export interface TicketDto {
+	Section: string;
+	Row: string;
+	SeatNumber: string;
+	Price: number;
+}
 
 class TicketsService {
 	private static readonly SEAT_AVAILABLE_STATUS_ID = 0;
 
-	public static async find(
-		ticketsFilters: TicketFiltersDtoParsed
-	): Promise<TicketDto[]> {
-		const { packageId } = ticketsFilters;
+	public static async find(packageId: number): Promise<TicketDto[]> {
 		const seats: Seat[] = await SeatRepository.getAllByPackageId(packageId);
 		const seatsAvailable: Seat[] = seats.filter(
 			(seat) => seat.SeatStatusId === this.SEAT_AVAILABLE_STATUS_ID

@@ -1,9 +1,9 @@
 import express, { Express } from 'express';
+import { graphqlHTTP } from 'express-graphql';
 import logger from 'morgan';
 
-import TicketsController from './controllers/tickets.controller';
+import { schema } from './schema/schema';
 import { handleError } from './middlewares/error_handling';
-import { validateGetTickets } from './middlewares/request_validation';
 
 export const app: Express = express();
 const port: number = 4000;
@@ -14,6 +14,12 @@ app.listen(port, () => {
 
 app.use(logger('dev'));
 
-app.get('/tickets', validateGetTickets, TicketsController.getAll);
+app.use(
+	'/graphql',
+	graphqlHTTP({
+		schema,
+		graphiql: true,
+	})
+);
 
 app.use(handleError);
